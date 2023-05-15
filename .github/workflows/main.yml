@@ -19,12 +19,19 @@ jobs:
         with:
           python-version: 3.10.11
           
-      - name: Install pathlib2
-        run: pip install pathlib2
-        
-      - name: Check1
+      - name: Fetch action
+        id: pl
+        uses: Rishabh510/Path-lister-action@master
+        with:
+          path: ".github/"
+          type: ".yml"
+
+      - name: Output results
         run: |
-          python -c "import pathlib2; print(pathlib2.Path('../../src/requirements.txt').is_file())"
+          echo "Found ${{ steps.pl.outputs.path_count }} file(s) with this extension:"
+          for i in ${{ steps.pl.outputs.paths }}; do
+          echo $i
+          done
           
 
         
