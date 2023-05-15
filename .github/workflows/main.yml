@@ -26,9 +26,8 @@ jobs:
       - name: Print working directory
         run: pwd
       
-      - name: Print all path
-        run: |
-          find . -type f
+      - name: List repository contents
+        run: ls -R
         
       - name: Install dependencies
         run: pip install -r ../../requirements.txt
