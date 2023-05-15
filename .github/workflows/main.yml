@@ -24,16 +24,12 @@ jobs:
         
       - name: Check1
         run: |
-          python -c "import pathlib2; print(pathlib2.Path('main.yml').is_file())"
-      - name: Check file location
-        run: |
-          ls -la .github/workflows
+          python -c "import pathlib2; print(pathlib2.Path('../../src/requirements.txt').is_file())"
           
-
 
         
       - name: Install dependencies
-        run: pip install -r ./src/requirements.txt
+        run: pip install -r ../../src/requirements.txt
 
       - name: Run bot
         run: python ./src/chinang_bot.py
