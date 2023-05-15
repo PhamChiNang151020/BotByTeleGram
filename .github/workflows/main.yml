@@ -25,15 +25,10 @@ jobs:
       - name: Check1
         run: |
           python -c "import pathlib2; print(pathlib2.Path('main.yml').is_file())"
-      - name: Check 2
+      - name: Check file location
         run: |
-          python -c "import pathlib2; print(pathlib2.Path('src/requirements.txt').is_file())"
-      - name: Check 3
-        run: |
-          python -c "import pathlib2; print(pathlib2.Path('./src/requirements.txt').is_file())"
-      - name: Check 4
-        run: |
-          python -c "import pathlib2; print(pathlib2.Path('../src/requirements.txt').is_file())"          
+          ls -la .github/workflows
+          
 
 
         
