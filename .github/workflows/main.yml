@@ -25,6 +25,10 @@ jobs:
         
       - name: Print working directory
         run: pwd
+      
+      - name: Print all path
+        run: |
+          find . -type f
         
       - name: Install dependencies
         run: pip install -r ../../requirements.txt
