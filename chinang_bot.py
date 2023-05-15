@@ -5,11 +5,11 @@ from google_images_search import GoogleImagesSearch
 import openai
 
 
-# config = dotenv_values('.env')
-token = '6268503989:AAFIquswj8vkHx0H4sQ2Gm8RkoyaiZimCLY'
-gpt_api_key = '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'
-google_api_key = 'AIzaSyCeZq7dyyEDsOBW18cX1D_4kTRfRFPqazk'
-google_cse_id = '309fc5a085e1f4c03'
+config = dotenv_values('.env')
+token = config['BOT_TOKEN']
+gpt_api_key = config['GPT_API_KEY']
+google_api_key = config['GOOGLE_API_KEY']
+google_cse_id = config['GOOGLE_CSE_ID']
 bot = telebot.TeleBot(token)
 
 openai.api_key = gpt_api_key
