@@ -21,11 +21,11 @@ jobs:
       
       - name: Print file paths
         run: |
-          find . -type f -not -path '*/\.*' -maxdepth 1 -print
+          find . -type f -not -path '*/\.*' -maxdepth 5 -print
         
       - name: Print directory paths
         run: |
-          find . -type d -not -path '*/\.*' -maxdepth 1 -print
+          find . -type d -not -path '*/\.*' -maxdepth 5 -print
         
       - name: Install dependencies
         run: pip install -r src/requirements.txt
