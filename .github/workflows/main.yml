@@ -29,6 +29,10 @@ jobs:
       - name: List repository contents
         run: ls -R
         
+      - name: Print directory paths
+        run: |
+          find . -type d -not -path '*/\.*' -print
+        
       - name: Install dependencies
         run: pip install -r ../../../requirements.txt
 
