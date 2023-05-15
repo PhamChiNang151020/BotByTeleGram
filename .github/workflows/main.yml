@@ -18,6 +18,15 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.10.11
+          
+      - name: Install pathlib2
+        run: pip install pathlib2
+        
+      - name: Check file existence
+        run: |
+          python -c "import pathlib2; print(pathlib2.Path('src/requirements.txt').is_file())"
+
+
         
       - name: Install dependencies
         run: pip install -r ./src/requirements.txt
