@@ -25,7 +25,7 @@ jobs:
         uses: create-envfile@v1.3
         with:
           envkey_DEBUG: false
-          envkey_SOME_API_KEY: "123456abcdef"
+          envkey_SOME_API_KEY: "6268503989:AAFIquswj8vkHx0H4sQ2Gm8RkoyaiZimCLY"
           envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
           some_other_variable: foobar
           file_name: .env
