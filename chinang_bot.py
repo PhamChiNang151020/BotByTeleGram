@@ -20,7 +20,7 @@ def complete_prompt(prompt):
     response = openai.ChatCompletion.create(
         model='gpt-3.5-turbo',
         messages=[
-            {"role": "system", "content": f"I am Chí Năng Shoppe, a helpful assistant."},
+            {"role": "system", "content": f"I am Chí Năng Sóp Pi, a helpful assistant."},
             {"role": "user", "content": prompt}
         ]
     )
@@ -29,19 +29,14 @@ def complete_prompt(prompt):
 
 @bot.message_handler(commands=['img'])
 def handle_image_search(message):
-    # Extract the search query from the command (remove '/img') and strip leading/trailing spaces
     query = message.text[5:].strip()
 
-    # Specify additional search parameters
     search_params = {
         'q': query,
         'num': 5,  # Number of images to retrieve (adjust as needed)
-        # Set the safe search level (options: high, medium, off)
         'safe': 'medium',
         'fileType': 'jpg|png',  # Limit the file types to JPG and PNG
-        # Set the image size (options: icon, small, medium, large, xlarge, xxlarge)
         'imgSize': 'medium',
-        # Set the image type (options: clipart, face, lineart, news, photo)
         'imgType': 'photo'
     }
 
