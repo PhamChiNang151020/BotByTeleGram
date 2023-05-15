@@ -24,7 +24,11 @@ jobs:
       - name: Load .env file
         run: |
           echo "$(<.env)" >> $GITHUB_ENV
-          
+      - name: Use environment variables
+        run: |
+          echo ${{ secrets.MY_VARIABLE }}
+
+
       - name: Install dependencies
         run: pip install -r requirements.txt
 
