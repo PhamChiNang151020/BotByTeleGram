@@ -20,4 +20,4 @@ jobs:
 #           pip install -r requirements.txt
 
       - name: Run bot
-        run: python /src/chinang_bot.py
+        run: python chinang_bot.py
