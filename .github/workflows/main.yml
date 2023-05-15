@@ -27,8 +27,9 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GOOGLE_CSE_ID: ${{ secrets.GOOGLE_CSE_ID }}
         run: |
-          # Use the OPENAI_API_KEY environment variable in your command or script
-          my_command --api-key $GPT_API_KEY
+          # Use the environment variables in your command or script
+          my_command --gpt-api-key $GPT_API_KEY --bot-token $BOT_TOKEN --google-api-key $GOOGLE_API_KEY --google-cse-id $GOOGLE_CSE_ID
+
 
       - name: Install dependencies
         run: pip install -r requirements.txt
