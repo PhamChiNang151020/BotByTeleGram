@@ -6,10 +6,10 @@ import openai
 
 
 config = dotenv_values('.env')
-token = config['BOT_TOKEN']
-gpt_api_key = config['GPT_API_KEY']
-google_api_key = config['GOOGLE_API_KEY']
-google_cse_id = config['GOOGLE_CSE_ID']
+token = config['6268503989:AAFIquswj8vkHx0H4sQ2Gm8RkoyaiZimCLY']
+gpt_api_key = config['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']
+google_api_key = config['AIzaSyCeZq7dyyEDsOBW18cX1D_4kTRfRFPqazk']
+google_cse_id = config['309fc5a085e1f4c03']
 bot = telebot.TeleBot(token)
 
 openai.api_key = gpt_api_key
