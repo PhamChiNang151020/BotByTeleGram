@@ -19,19 +19,9 @@ jobs:
         with:
           python-version: 3.10.11
           
-      - name: Fetch action
-        id: pl
-        uses: Rishabh510/Path-lister-action@master
-        with:
-          path: ".github/"
-          type: ".yml"
-
-      - name: Output results
+      - name: List files in the repository
         run: |
-          echo "Found ${{ steps.pl.outputs.path_count }} file(s) with this extension:"
-          for i in ${{ steps.pl.outputs.paths }}; do
-          echo $i
-          done
+            ls ${{ github.workspace }}
           
 
         
