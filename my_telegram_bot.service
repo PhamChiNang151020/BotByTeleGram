@@ -1,0 +1,11 @@
+[Unit]py
+Description=My Telegram Bot
+After=network.target
+
+[Service]
+ExecStart=C:/Users/PCN/AppData/Local/Programs/Python/Python310 D:/SourceCode/BotByTeleGram/demo_bot.py
+WorkingDirectory=D:/SourceCode/BotByTeleGram/demo_bot.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
