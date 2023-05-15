@@ -21,13 +21,22 @@ jobs:
         with:
           python-version: 3.10.11
 
-      - name: Load .env file
-        run: |
-          echo "$(<.env)" >> $GITHUB_ENV
-      - name: Use environment variables
-        run: |
-          echo ${{ secrets.MY_VARIABLE }}
+      - name: Make envfile
+        uses: create-envfile@v1.3
+        with:
+          envkey_DEBUG: false
+          envkey_SOME_API_KEY: "123456abcdef"
+          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          some_other_variable: foobar
+          file_name: .env
+          fail_on_empty: false
 
+      # - name: Load .env file
+      #   run: |
+      #     echo "$(<.env)" >> $GITHUB_ENV
+      # - name: Use environment variables
+      #   run: |
+      #     echo ${{ secrets.MY_VARIABLE }}
 
       - name: Install dependencies
         run: pip install -r requirements.txt
