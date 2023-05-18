@@ -4,6 +4,7 @@ from dotenv import dotenv_values
 from google_images_search import GoogleImagesSearch
 import openai
 
+from telebot import types
 
 config = dotenv_values('.env')
 token = config['BOT_TOKEN']
@@ -15,6 +16,33 @@ bot = telebot.TeleBot(token)
 openai.api_key = gpt_api_key
 gis = GoogleImagesSearch(google_api_key, google_cse_id)
 
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    markup = types.InlineKeyboardMarkup()
+
+    # Tạo các nút tương tác cho menu
+    btn1 = types.InlineKeyboardButton('Lựa chọn 1', callback_data='option1')
+    btn2 = types.InlineKeyboardButton('Lựa chọn 2', callback_data='option2')
+    btn3 = types.InlineKeyboardButton('Lựa chọn 3', callback_data='option3')
+
+    # Thêm các nút vào menu
+    markup.add(btn1, btn2, btn3)
+
+    # Gửi menu đến người dùng
+    bot.send_message(message.chat.id, 'Chọn một lựa chọn:', reply_markup=markup)
+
+@bot.callback_query_handler(func=lambda call: True)
+def handle_callback(call):
+    if call.data == 'option1':
+        # Xử lý lựa chọn 1
+        bot.send_message(call.message.chat.id, 'Bạn đã chọn lựa chọn 1.')
+    elif call.data == 'option2':
+        # Xử lý lựa chọn 2
+        bot.send_message(call.message.chat.id, 'Bạn đã chọn lựa chọn 2.')
+    elif call.data == 'option3':
+        # Xử lý lựa chọn 3
+        bot.send_message(call.message.chat.id, 'Bạn đã chọn lựa chọn 3.')
 
 def complete_prompt(prompt):
     response = openai.ChatCompletion.create(
@@ -56,20 +84,34 @@ def handle_message(message):
     prompt = message.text
     response = complete_prompt(prompt)
 
+
     try:
         if '```' in response:
             formatted_response = response.strip('`')
             if message.reply_to_message:
-                bot.reply_to(
-                    message.reply_to_message, formatted_response, parse_mode='Markdown')
+                if message.chat.type == 'private':
+                    bot.reply_to(
+                        message.reply_to_message, formatted_response, parse_mode='Markdown')
+                else:
+                    bot.reply_to(
+                        message.reply_to_message, formatted_response)
             else:
-                bot.send_message(
-                    message.chat.id, formatted_response, parse_mode='Markdown')
+                if message.chat.type == 'private':
+                    bot.send_message(
+                        message.chat.id, formatted_response, parse_mode='Markdown')
+                else:
+                    bot.send_message(message.chat.id, formatted_response)
         else:
             if message.reply_to_message:
-                bot.reply_to(message.reply_to_message, response)
+                if message.chat.type == 'private':
+                    bot.reply_to(message.reply_to_message, response)
+                else:
+                    bot.reply_to(message.reply_to_message, response)
             else:
-                bot.send_message(message.chat.id, response)
+                if message.chat.type == 'private':
+                    bot.send_message(message.chat.id, response)
+                else:
+                    bot.send_message(message.chat.id, response)
     except telebot.apihelper.ApiTelegramException as e:
         bot.send_message(
             message.chat.id, "Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.")
